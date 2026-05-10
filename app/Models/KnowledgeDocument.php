@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Database\Factories\KnowledgeDocumentFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -9,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class KnowledgeDocument extends Model
 {
-    /** @use HasFactory<\Database\Factories\KnowledgeDocumentFactory> */
+    /** @use HasFactory<KnowledgeDocumentFactory> */
     use HasFactory;
 
     public const SOURCE_AUDIO = 'audio';

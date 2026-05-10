@@ -12,9 +12,7 @@ use Illuminate\Support\Facades\Storage;
 
 class DocumentIngestionService
 {
-    public function __construct(private readonly AiGateway $aiGateway)
-    {
-    }
+    public function __construct(private readonly AiGateway $aiGateway) {}
 
     public function ingestText(string $title, string $rawText, int $adminId): KnowledgeDocument
     {
@@ -100,6 +98,7 @@ class DocumentIngestionService
             if ($candidate !== '' && mb_strlen($candidate) > $chunkSize && $buffer !== '') {
                 $chunks[] = trim($buffer);
                 $buffer = trim($paragraph);
+
                 continue;
             }
 

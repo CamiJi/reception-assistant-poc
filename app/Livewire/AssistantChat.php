@@ -2,8 +2,8 @@
 
 namespace App\Livewire;
 
-use App\Support\PracticalSheetFormatter;
 use App\Services\ReceptionAssistant\RagAnswerService;
+use App\Support\PracticalSheetFormatter;
 use Livewire\Component;
 
 class AssistantChat extends Component

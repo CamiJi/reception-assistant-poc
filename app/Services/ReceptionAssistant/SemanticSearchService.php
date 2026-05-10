@@ -9,9 +9,7 @@ use Illuminate\Support\Facades\Schema;
 
 class SemanticSearchService
 {
-    public function __construct(private readonly AiGateway $aiGateway)
-    {
-    }
+    public function __construct(private readonly AiGateway $aiGateway) {}
 
     /**
      * @return array<int, array{score: float, content: string, document_title: string, practical_sheet: array<string, string>}>

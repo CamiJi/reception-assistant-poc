@@ -1,0 +1,47 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    working_dir: /var/www/html
+    command: sh -lc "composer install && php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=8000"
+    volumes:
+      - ./:/var/www/html
+    ports:
+      - "8000:8000"
+    environment:
+      APP_ENV: local
+      APP_DEBUG: "true"
+      DB_CONNECTION: pgsql
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_DATABASE: reception_assistant
+      DB_USERNAME: reception
+      DB_PASSWORD: reception
+    depends_on:
+      - db
+
+  vite:
+    image: node:24
+    working_dir: /var/www/html
+    command: sh -lc "npm install && npm run dev -- --host 0.0.0.0"
+    volumes:
+      - ./:/var/www/html
+    ports:
+      - "5173:5173"
+    depends_on:
+      - app
+
+  db:
+    image: pgvector/pgvector:pg17
+    environment:
+      POSTGRES_DB: reception_assistant
+      POSTGRES_USER: reception
+      POSTGRES_PASSWORD: reception
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
